@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {View, Text, StyleSheet, Image, Button, Alert, TextInput} from 'react-native'
 import Home from './Home'
+import Banner from './src/main/containers/banner'
+import Page from './src/main/containers/page'
 
 class HolaMundo extends Component{
 
@@ -28,66 +30,44 @@ class HolaMundo extends Component{
 
   render(){
     return(
-      <View style={styles.container}>
-
-        <View style={styles.header}>
-          <View style={styles.headerLogo}>
-            <Image source={require('./assets/logo.png')} style={styles.logo}/>
-          </View>
-        </View>
-        {
-          this.state.login == false
-          ?
-              <View style={styles.body}>
-                <View style={styles.card}>
-                  <TextInput placeholder = "Número de Boleta" onChangeText = { (userName) => this.setState({userName}) } style={styles.inputs}/>
-                  <TextInput placeholder = "Contraseña" onChangeText = { (password) => this.setState({password}) } style={styles.inputs}/>
-                  <Button title={"Login"} onPress={this.login}/>
+        <View style={styles.container}>
+          <Page/>
+          <Banner/>
+          {
+            this.state.login == false
+                ?
+                <View style={styles.body}>
+                  <View style={styles.card}>
+                    <TextInput placeholder = "Número de Boleta" onChangeText = { (userName) => this.setState({userName}) } style={styles.inputs}/>
+                    <TextInput placeholder = "Contraseña" onChangeText = { (password) => this.setState({password}) } style={styles.inputs}/>
+                    <Button title={"Login"} onPress={this.login}/>
+                  </View>
                 </View>
-              </View>
-          :
-            <Home userName={this.state.userName}/>
-        }
-
-      </View>
+                :
+                <Home userName={this.state.userName}/>
+          }
+        </View>
     )
   }
 }
-
-
-
 const styles = StyleSheet.create({
   container : {
     flex : 1,
     flexDirection: 'column',
   },
-  header: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 50,
-    backgroundColor: '#53A8BB'
-  },
-  headerLogo: {
-    flex: 1,
-  },
-  logo: {
-    width : '100%',
-    height : '60%',
-    resizeMode: 'contain'
-  },
   body: {
-    flex: 3,
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#53A8BB',
-    paddingBottom: 50
+    marginTop: 100,
   },
   card: {
     flex: 0.3,
     width: '80%',
     backgroundColor: 'white',
     borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'gray',
     padding: 20
 
   },
